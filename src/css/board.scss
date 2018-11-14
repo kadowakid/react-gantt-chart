@@ -1,0 +1,128 @@
+.boardArea {
+  margin: 80px 20px;
+  white-space: nowrap;
+  .boardAreaMember {
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+    margin: 10px;
+  }
+  .boardAreaMemberName {
+    padding: 10px 20px;
+    min-height: 40px;
+    font-size: 12px;
+    color: $white;
+    font-weight: bold;
+    background: $black;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    white-space: normal;
+    word-break: break-all;
+    &.newMember {
+      border: 1px solid $black;
+      color: $black;
+      background: transparent;
+      transition: background .3s;
+      &:hover,
+      &.add {
+        cursor: pointer;
+        color: $green;
+        background: $black;
+      }
+      &.add {
+        text-align: left;
+        padding: 8px 10px;
+        input[type="text"]{
+          background: $black;
+          border: 1px solid $gray;
+          padding: 2px 5px;
+          width: 115px;
+          color: $white;
+          font-size: 12px;
+          font-weight: 600;
+          &:focus {
+            background: $light_gray;
+            color: $black;
+          }
+        }
+        button {
+          position: absolute;
+          right: 10px;
+          font-size: 12px;
+          padding: 0 5px;
+          color: $white;
+          background: $black;
+          border: 1px solid $gray;
+          border-radius: 5px;
+          font-size: 12px;
+          font-weight: normal;
+          transition: .3s;
+          cursor: pointer;
+          &:hover {
+            color: $green;
+          }
+        }
+      }
+    }
+    button {
+      position: absolute;
+      top: 50%;
+      right: 5px;
+      transform: translateY(-50%);
+      background: transparent;
+      color: $white;
+      transition: .3s;
+      &:hover {
+        cursor: pointer;
+        color: $green;
+      }
+    }
+  }
+  .boardAreaTask {
+    width: 200px;
+    min-height:52px;
+    padding: 0 5px 25px;
+    background: $white;
+    vertical-align: top;
+    margin-top: 10px;
+    word-break: break-all;
+    position: relative;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 3px #999;
+    border-left: 10px solid $light_gray;
+    color: $black;
+    font-weight: normal;
+    text-align: left;
+    font-size: 12px;
+    white-space: normal;
+    transition: .3s;
+    cursor: pointer;
+  }
+  .boardAreaTaskTitle {
+    border-bottom: 1px dashed $light_gray;
+    padding: 5px 0 ;
+    font-weight: 600;
+    word-break: break-all;
+  }
+  .boardAreaTaskRemarks {
+    padding: 5px 0 0;
+    color: #999;
+    box-sizing: border-box;
+    overflow-y: hidden;
+  } 
+  .boardAreaTaskFooter {
+    position: absolute;
+    font-size: 12px;
+    bottom: 0;
+    right: 0;
+    min-height: 25px;
+    line-height: 25px;
+    width: 100%;
+    box-sizing: border-box;
+    background: $white;
+    color: #666;
+    text-align: right;
+    padding-right: 5px;
+  }
+}

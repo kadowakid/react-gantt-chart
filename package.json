@@ -1,0 +1,35 @@
+{
+  "name": "react-gantt-chart",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "build": "NODE_ENV=production webpack",
+    "start": "NODE_ENV=development webpack-dev-server"
+  },
+  "author": "kadowakid",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "blackout-animation": "^0.0.15",
+    "core-js": "^2.5.7",
+    "css-loader": "^1.0.1",
+    "node-sass": "^4.9.4",
+    "react": "^16.6.0",
+    "react-color": "^2.14.1",
+    "react-day-picker": "^7.2.4",
+    "react-dom": "^16.6.0",
+    "react-redux": "^5.1.0",
+    "react-router": "^4.3.1",
+    "react-transition-group": "^1.2.1",
+    "redux": "^4.0.1",
+    "redux-logger": "^2.10.2",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  }
+}

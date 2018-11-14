@@ -1,0 +1,185 @@
+.chartArea {
+  margin: 90px 30px 0;
+  .chartAreaWrapper {
+    background: $white;
+    box-shadow: 1px 1px 3px #999;
+    position: relative;
+  }
+  .chartPeriodArea {
+    position: absolute;
+    width: 250px;
+    height: 90px;
+    top: 0;
+    line-height: 90px;
+    text-align: center;
+    select {
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      background: $white;
+      color: $black;
+      margin: 0 3px;
+      border-radius: 50%;
+      box-sizing: border-box;
+      padding-left: 8px;
+      border: 1px solid $black;
+    }
+  }
+  .chartMemberArea {
+    width: 250px;
+    max-height: calc(100vh - 210px);
+    overflow-y: hidden;
+    padding: 0 0;
+    box-sizing: border-box;
+    border-top: 1px solid $gray;
+    position: absolute;
+    top: 90px;
+    left: 0;
+  }
+  .chartMemberName {
+    font-size: 12px;
+    font-weight: 600;
+    padding-left: 10px;
+    box-sizing: border-box;
+    background: $black;
+    color: $white;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    border-bottom: 1px solid $gray;
+  }
+  .chartMemberTask {
+    font-size: 12px;
+    border-left: 10px solid $gray;
+    padding-left: 10px;
+    box-sizing: border-box;
+    background: $white;
+    color: $black;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    border-bottom: 1px solid $gray;
+    &:hover:hover {
+      cursor: pointer;
+    }
+  }
+  .chartCalenderArea {
+    margin-left: 250px;
+    border-left: 1px solid $gray;
+    overflow: hidden;
+  }
+  .chartCalenderHeader {
+    height: 90px;
+    max-height: 90px;
+    width: 100%;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+  .chartCalenderYearBlock {
+    height: 90px;
+    display: inline-block;
+    border-right: 1px solid $gray;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    &:last-child {
+      border-right: 1px solid $gray;
+    }
+  }
+  .chartCalenderYear {
+    box-sizing: border-box;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid $gray;
+    text-align: center;
+  }
+  .chartCalenderMonth {
+    box-sizing: border-box;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid $gray;
+    border-right: 1px solid $gray;
+    text-align: center;
+    &:last-child {
+      border-right: 0;
+    }  
+  }
+  .chartCalenderDay {
+    height: 30px;
+    min-width: 20px;
+    line-height: 30px;
+    box-sizing: border-box;
+    border-right: 1px solid $gray;
+    text-align: center;
+    &.saturday {
+      background: #e0ffff;
+    }
+    &.sunday {
+      background: #ffb6c1;
+    }
+    &.today {
+      background: $light_gray;
+    }
+    &:last-child {
+      border-right: 0;
+    }
+  }
+  .chartContent {
+    white-space: nowrap;
+    max-height: calc(100vh - 210px);
+    overflow: scroll;
+  }
+  .chartContentYearBlock {
+    display: inline-block;
+    vertical-align: top;
+    &:last-child {
+      border-right: 1px solid $gray;
+      table {
+        overflow: hidden;
+      }
+    }
+  }
+  .chartContentCell {
+    max-height: 30px;
+    min-width: 20px;
+    line-height: 30px;
+    box-sizing: border-box;
+    border-top: 1px solid $gray;
+    border-right: 1px solid $gray;
+    text-align: center;
+    position: relative;
+    &:before {
+      content: "";
+      display: block;
+      height: 29px;
+      width: 0;
+    }
+    &.archive {
+      opacity: 1;
+      .chartContentBar {
+        opacity: 0.5;
+      }
+    }
+    &.saturday {
+      background: #e0ffff;
+    }
+    &.sunday {
+      background: #ffb6c1;
+    }
+    &.today {
+      background: $light_gray;
+    }
+  }
+  .chartContentBar {
+    display: inline-block;
+    position: absolute;
+    top: 4px;
+    box-sizing: border-box;
+    left: 0;
+    width: 200px;
+    height: 20px;
+    background: $gray;
+    z-index: 20;
+    box-shadow: $box_shadow;
+    cursor: pointer;
+  }
+}

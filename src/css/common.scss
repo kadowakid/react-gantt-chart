@@ -1,0 +1,81 @@
+html,
+body {
+  font-family: "-apple-system", "BlinkMacSystemFont", "Helvetica Neue", "Roboto", sans-serif;
+  font-size: 12px;
+  color: $black;
+}
+
+body {
+  background: $light_gray;
+  overflow-y: scroll
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.hover {
+  transition: 0.3s;
+}
+.hover:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.archive {
+  opacity: 0.5;
+}
+
+.topMenu {
+  width: 100%;
+  min-width: 730px;
+  height: 70px;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  box-sizing: border-box;
+  background: transparent;
+  border-bottom: 1px solid $black;
+  padding: 0 30px;
+  background: rgba(240, 240, 240, 0.9);
+  .topMenuTtl {
+    float: left;
+    font-size: 36px;
+    font-weight: 900;
+    height: 70px;
+    line-height: 70px;
+
+  }
+  .topMenuTabs {
+    float: right;
+    height: 70px;
+    button {
+      vertical-align: top;
+      margin-top: 25px;
+      padding : 3px 0;
+      text-align: center;
+      width: 70px;
+      font-size: 12px;
+      background: transparent;
+      border: 1px solid $black;
+      letter-spacing: .3px;
+      cursor: pointer;
+      transition: .3s;
+      +button {
+        margin-left: 15px;
+      }
+      &:hover,
+      &.on {
+        background: $black;
+        color: $white;
+      }
+      &:hover {
+        color: $green;
+      }
+    }
+  }
+}

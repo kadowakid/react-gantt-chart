@@ -1,0 +1,30 @@
+.fade-appear {
+  opacity: 0.01;
+  margin-top: 20px;
+}
+
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  margin-top: 10px;
+  transition: all 500ms ease-in-out;
+}
+
+.fade-enter {
+  opacity: 0.01;
+  margin-top: 50px;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  margin-top: 10px;
+  transition: all 500ms ease-in-out;
+}
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

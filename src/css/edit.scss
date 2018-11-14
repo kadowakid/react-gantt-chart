@@ -1,0 +1,417 @@
+.editBg {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.editCancel {
+  position: absolute;
+  width:30px;
+  height:30px;
+  background: $black;
+  text-align: center;
+  letter-spacing: 0;
+  color: $white;
+  top: -50px;
+  right: -30px;
+  font-size:24px;
+  line-height: 0;
+  border-radius: 50%;
+  box-sizing: border-box;
+  padding-bottom:5px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.editBody {
+  width: 60%;
+  height: 60%;
+  min-width: 500px;
+  min-height: 500px;
+  background: $white;
+  border-top: 25px solid $gray;
+  animation: up;
+  animation-duration: 0.3s;
+  box-sizing: border-box;
+  padding: 0 0 0 140px;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: $box_shadow;
+  white-space: normal;
+  transition: .3s;
+  p {
+    min-height: 1.5em;
+  }
+  .editMenu {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: 120px;
+    &>div {
+      height: 30px;
+      line-height: 30px;
+      color: $black;
+      border-bottom: 1px solid $gray;
+      position: relative;
+      box-sizing: border-box;
+      &.sideMenu {
+        cursor: pointer;
+      }
+      select {
+        display: inline-block;
+        width: 100%;
+        height: 29px;
+        background: $white;
+        color: $black;
+        box-sizing: border-box;
+        box-sizing: border-box;
+        border:0;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      input {
+        border: 0;
+        width: 100%;
+        text-align: right;
+        font-weight: 600;
+        cursor: pointer;
+      }
+    }
+    .day {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .DayPicker {
+      line-height: normal;
+    }
+  }
+  .editMenuMember:after {
+    content:"";
+    display:block;
+    position:absolute;
+    top:50%;
+    right:0;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8.7px 5px 0 5px;
+    border-color: $gray transparent transparent transparent;
+    pointer-events: none;
+  }
+  .editContent {
+    background: $white;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    border-left: 1px solid $gray;
+    padding: 20px;
+    border-radius: 0 0 5px 0;
+    position: relative;
+    dl {
+      &+dl {
+        margin-top: 10px;
+      }
+      dt {
+        font-weight: 600;
+      }
+      dd {
+        margin-top: 3px;
+      }
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 7px 10px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid $gray;
+      &:focus {
+        background: $light_gray;
+      }
+    }
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 7px 10px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid $gray;
+      &:focus {
+        background: $light_gray;
+      }
+    }
+  }
+  .editArchiveMessage {
+    border: 2px solid $gray;
+    padding: 5px 10px;
+    border-radius:10px;
+    color: $gray;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .editTaskTitle {
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0 0 10px 0;
+    word-break: break-all;
+    border-bottom: 1px dashed $gray;
+  }
+  .editTaskRemarks {
+    font-size: 12px;
+    padding: 10px 0 0;
+    color: #999;
+  }
+  .editTaskText {
+    padding-top:10px;
+  }
+  .editChangeButton {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    z-index: 5;
+    width: 48px;
+    height: 24px;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    background: $black;
+    color: $white;
+    transition: .3s;
+    box-sizing: border-box;
+    border: 1px solid $white;
+    cursor: pointer;
+  }
+  .editColorButton {
+    position: absolute;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: $gray;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .3s;
+  }
+  .editColorPicker {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 15;
+  }
+  .editColorCancelWrap {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background: $gray;
+  }
+  .editSubmitButtonBox {
+    text-align: right;
+    margin-top:15px;
+    button {
+      width:80px;
+      height:30px;
+      background: $white;
+      border: 1px solid $gray;
+      color:$black;
+      text-align: center;
+      line-height:30px;
+      transition: .3s;
+      border-radius:5px;
+      margin-left:20px;
+      &:hover{
+        background: $light_gray;
+        cursor:pointer;
+      }
+    }
+  }
+}
+
+.editMember {
+  min-width: 350px;
+  min-height: 200px;
+  background: $white;
+  border-top: 25px solid $gray;
+  animation: up;
+  animation-duration: 0.3s;
+  box-sizing: border-box;
+  padding: 0;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: $box_shadow;
+  white-space: normal;
+  transition: .3s;
+}
+.editMemberList {
+  width: 40%;
+  height: 40%;
+  min-width: 500px;
+  min-height: 500px;
+  background: $white;
+  border-top: 25px solid $gray;
+  animation: up;
+  animation-duration: 0.3s;
+  box-sizing: border-box;
+  padding: 0;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: $box_shadow;
+  white-space: normal;
+  transition: .3s;
+  .editMemberListArea {
+    padding: 0 20px;
+    position: relative;
+    height:100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden; 
+  }
+  .editMemberListTitle {
+    height:50px;
+    line-height: 50px;
+    font-size: 24px;
+    font-weight: 900;
+  }
+  .editMemberListName {
+    li {
+      position: relative;
+      height: auto;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid $gray;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom:10px;
+      transition: .3s;
+      position: relative;
+      &:hover:not(.editMode) {
+        background: $black;
+        color: $white;
+        border-color: $black;
+        cursor: pointer;
+      }
+      &.editMode {
+        background: $black;
+        color: $white;
+        border-color: $black;
+        height: 100px;
+        .editMemberArrowBox {
+          position: absolute;
+          top:10px;
+          right:10px;
+          button{
+            background: $white;
+            width:20px;
+            height:20px;
+            border-radius:50%;
+            margin-right:5px;
+            padding-bottom: 1px;
+            box-sizing: border-box;
+            color: $black;
+            transition: .3s;
+            letter-spacing: 0;
+            &:hover {
+              cursor: pointer;
+              background: $gray;
+            }
+          }
+        }
+        input[type="text"]{
+          background: $black;
+          border: 1px solid $gray;
+          padding: 5px 10px;
+          width: 200px;
+          color: $white;
+          font-size: 12px;
+          font-weight: 600;
+          &:focus {
+            background: $gray;
+            color: $black;
+          }
+        }
+        .editMemberButtonBox {
+          position: absolute;
+          bottom: 10px;
+          right: 15px;
+          button {
+            margin-left: 15px;
+            padding: 3px 10px;
+            color: $white;
+            background: $black;
+            border: 1px solid $gray;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: normal;
+            transition: .3s;
+            cursor: pointer;
+            &:hover {
+              background: $gray;
+              color: $black;
+            }
+          }
+        }
+      }
+      &.add {
+        font-size: 16px;
+        text-align: center;
+        max-height: none;
+        height: auto;
+        &:hover {
+          color: $green;
+        }
+        &.open {
+          text-align: left;
+          background: $black;
+          cursor: auto;
+          input[type="text"]{
+            background: $black;
+            border: 1px solid $gray;
+            padding: 5px 10px;
+            width: calc(100% - 100px);
+            color: $white;
+            font-size: 12px;
+            font-weight: 600;
+            &:focus {
+              background: $gray;
+              color: $black;
+            }
+          }
+          button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 12px;
+            margin-left: 15px;
+            padding: 3px 10px;
+            color: $white;
+            background: $black;
+            border: 1px solid $gray;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: normal;
+            transition: .3s;
+            cursor: pointer;
+            &:hover {
+              background: $light_gray;
+              color: $black;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
