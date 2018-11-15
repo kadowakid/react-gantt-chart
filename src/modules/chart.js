@@ -11,12 +11,13 @@ export function chart(prev,next){
     let yearLength = 0;
     let monthList = []; 
     for(let m = -prev ; m <= next ; m++){
-      const monthValue = currentMonth + m;
-      if(monthValue < 12 * y) continue;
-      if(monthValue === 12 * (y + 1)) break;
-      const monthNum = new Date(currentYear, monthValue, 1).getMonth() + 1;
-      const startDay = new Date(currentYear, monthValue, 1).getDay();
-      const endDate  = new Date(currentYear, monthValue + 1, 0).getDate();
+      const newMonthValue = currentMonth + m;
+      if(newMonthValue < 12 * y) continue;
+      if(newMonthValue >= 12 * (y + 1)) break;
+      const newMonth = new Date(currentYear, newMonthValue, 1);
+      const monthNum = newMonth.getMonth() + 1;
+      const startDay = newMonth.getDay();
+      const endDate  = new Date(currentYear, newMonthValue + 1, 0).getDate();
       let dateList = [];
       for(let i = 0; i < endDate; i++){
         dateList.push(i + 1);

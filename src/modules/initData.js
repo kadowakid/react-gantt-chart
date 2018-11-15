@@ -48,7 +48,7 @@ function sampleData(){
       if(sampleCategory[key].num === categoryNum) categoryKey = key
     })
     sampleTasks[taskKey] = {
-      archive : i < 12 ? false : true, 
+      archive : i > 12, 
       title : 'sampleTask' + num,
       remarks: 'sampleRemarks'  + num,
       desc: 'sampleTask'+num+'\nsampleTask'+num+'\nsampleTask'+num+'\nsampleTask'+num,

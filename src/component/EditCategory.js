@@ -123,7 +123,7 @@ class EditCategory extends Component {
               <li className={categoryKey === category.categoryKey ? "editMode" : ""} key={category.categoryKey} onClick={()=> categoryKey !== category.categoryKey && this.editCategory(category.categoryKey)}>
                 {categoryKey === category.categoryKey ? 
                   <input type="text" defaultValue={category.name} ref={category.categoryKey}/> :
-                  category.name}{/*'（' + this.categoryTaskNum(category.categoryKey) + '）'*/}
+                  category.name}
                 {categoryKey === category.categoryKey &&
                   <div className="editCategoryArrowBox">
                     {i > 0 && <button onClick={()=>this.swapCategories(i,i-1)}>↑</button>}
