@@ -1,13 +1,13 @@
 .boardArea {
   margin: 80px 20px;
   white-space: nowrap;
-  .boardAreaMember {
+  .boardAreaCategory {
     display: inline-block;
     vertical-align: top;
     width: 200px;
     margin: 10px;
   }
-  .boardAreaMemberName {
+  .boardAreaCategoryName {
     padding: 10px 20px;
     min-height: 40px;
     font-size: 12px;
@@ -19,7 +19,7 @@
     position: relative;
     white-space: normal;
     word-break: break-all;
-    &.newMember {
+    &.newCategory {
       border: 1px solid $black;
       color: $black;
       background: transparent;

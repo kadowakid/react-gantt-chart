@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {chart} from '../modules/chart'
-import {sortTasks, sortMembers} from '../modules/sortData'
+import {sortTasks, sortCategories} from '../modules/sortData'
 import {updateFlags,updateKeys} from '../action'
 
 class Chart extends Component {
@@ -24,7 +24,7 @@ class Chart extends Component {
   }
 
   setDefaultScroll(){
-    if(!this.state.defaultScrollFlag || !Object.keys(this.props.members).length) return false;
+    if(!this.state.defaultScrollFlag || !Object.keys(this.props.categories).length) return false;
     const cellWidth = 20;
     let chartObject = chart(this.state.chartPrev,0);
     let scrollNum = 0;
@@ -48,20 +48,20 @@ class Chart extends Component {
     this.setState({chartNext: next, defaultScrollFlag: true});
   }
 
-  showTask(taskKey,memberKey) {
+  showTask(taskKey,categoryKey) {
     this.props.dispatch(updateKeys({
       taskKey : taskKey,
-      memberKey : memberKey
+      categoryKey : categoryKey
     }));
     this.props.dispatch(updateFlags({showTaskFlag: true}))
   }
 
-  memberTaskNum(memberKey){
+  categoryTaskNum(categoryKey){
     let num = 0;
     const archiveFlag = this.props.flags.showArchiveFlag;
     const tasks = this.props.tasks;
     Object.keys(tasks).forEach((key) => {
-      if(memberKey === tasks[key].memberKey && (archiveFlag ? true : !tasks[key].archive)) num++;
+      if(categoryKey === tasks[key].categoryKey && (archiveFlag ? true : !tasks[key].archive)) num++;
     });
     return num;
   }
@@ -100,13 +100,13 @@ class Chart extends Component {
   chartScroll() {
     const scrollY = this.refs.chartContent.scrollTop;
     const scrollX = this.refs.chartContent.scrollLeft;
-    this.refs.chartMember.style.marginTop = -scrollY + 'px';
+    this.refs.chartCategory.style.marginTop = -scrollY + 'px';
     this.refs.chartHeader.style.marginLeft = -scrollX + 'px';
   }
 
   render() {
     const showArchiveFlag = this.props.flags.showArchiveFlag;
-    const membersArray = this.props.members && sortMembers(Object.keys(this.props.members).map(key => {return this.props.members[key]}))
+    const categoriesArray = this.props.categories && sortCategories(Object.keys(this.props.categories).map(key => {return this.props.categories[key]}))
     const tasksArray = this.props.tasks && sortTasks(Object.keys(this.props.tasks).map(key => {return this.props.tasks[key]}))
     const chartObject = chart(this.state.chartPrev, this.state.chartNext);
     return (
@@ -124,18 +124,18 @@ class Chart extends Component {
               </select>
               ヶ月後
               </div>
-              <div className="chartMemberArea">
-                <div className="chartMemberAll" ref="chartMember">
+              <div className="chartCategoryArea">
+                <div className="chartCategoryAll" ref="chartCategory">
                   {
-                    membersArray.map((member) => (<div className="chartMemberWrap" key={member.memberKey}>
-                      <h2 className="chartMemberName">
-                        {member.name}
-                        {'（' + this.memberTaskNum(member.memberKey) + '）'}
+                    categoriesArray.map((category) => (<div className="chartCategoryWrap" key={category.categoryKey}>
+                      <h2 className="chartCategoryName">
+                        {category.name}
+                        {'（' + this.categoryTaskNum(category.categoryKey) + '）'}
                       </h2>
                       {
                         [...Array(2)].map((none,i) => tasksArray.map((cell) => {
-                          if (!i && member.memberKey === cell.memberKey && !cell.archive || i && member.memberKey === cell.memberKey && cell.archive && showArchiveFlag)
-                            return (<div key={cell.taskKey} className={"chartMemberTask" + (cell.archive ? " archive" : "")} onClick={() => this.showTask(cell.taskKey, cell.memberKey)} style={{
+                          if (!i && category.categoryKey === cell.categoryKey && !cell.archive || i && category.categoryKey === cell.categoryKey && cell.archive && showArchiveFlag)
+                            return (<div key={cell.taskKey} className={"chartCategoryTask" + (cell.archive ? " archive" : "")} onClick={() => this.showTask(cell.taskKey, cell.categoryKey)} style={{
                                 borderLeftColor: cell.taskColor
                               }}>
                               {cell.title}
@@ -173,8 +173,8 @@ class Chart extends Component {
                     chartObject.map((yearObject,yearNum) => (<div className="chartContentYearBlock" key={yearObject.yearNum}>
                       <table>
                         {
-                          membersArray.map((member) => (<tbody key={member.memberKey}>
-                            <tr key={member.memberKey}>
+                          categoriesArray.map((category) => (<tbody key={category.categoryKey}>
+                            <tr key={category.categoryKey}>
                               {
                                 yearObject.monthList.map((monthObject) => monthObject.dateList.map((date) => {
                                   return (<td className={"chartContentCell" + this.editChartDay(yearObject.yearNum, monthObject.monthNum, date, monthObject.startDay)} key={date}></td>)
@@ -183,7 +183,7 @@ class Chart extends Component {
                             </tr>
                             {
                               [...Array(2)].map((none,i) => tasksArray.map((cell) => {
-                                if (!i && member.memberKey === cell.memberKey && !cell.archive || i && member.memberKey === cell.memberKey && cell.archive && showArchiveFlag)
+                                if (!i && category.categoryKey === cell.categoryKey && !cell.archive || i && category.categoryKey === cell.categoryKey && cell.archive && showArchiveFlag)
                                   return (
                                   <tr key={cell.taskKey}>{
                                       yearObject.monthList.map((monthObject,monthNum) => monthObject.dateList.map((date,dateNum) => {
@@ -194,7 +194,7 @@ class Chart extends Component {
                                             <div className="chartContentBar" style={{
                                               background: cell.taskColor,
                                               width: this.editChartBarSize(cell.startDate, cell.endDate, overflow ? [yearObject.yearNum, monthObject.monthNum, date] : false)
-                                            }} onClick={() => this.showTask(cell.taskKey, cell.memberKey)}></div>
+                                            }} onClick={() => this.showTask(cell.taskKey, cell.categoryKey)}></div>
                                         }</td>)
                                       }))
                                     }
@@ -219,7 +219,7 @@ class Chart extends Component {
 const propsState = (state) => {
   return {
     tasks: state.tasks,
-    members: state.members,
+    categories: state.categories,
     flags: state.flags
   }
 }

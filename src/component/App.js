@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import Chart from './Chart'
 import Board from './Board'
 import EditTask from './EditTask'
-import EditMember from './EditMember'
+import EditCategory from './EditCategory'
 import {updateFlags} from '../action'
 import {slideAnimation} from 'blackout-animation'
 import "../css/app.scss";
@@ -15,7 +15,7 @@ class App extends Component {
   componentDidUpdate(){
     const data = {
       tasks: this.props.tasks,
-      members: this.props.members
+      categories: this.props.categories
     };
     const storage = JSON.stringify(data);
     localStorage.setItem('ReactGanttChart', storage);
@@ -35,13 +35,13 @@ class App extends Component {
   handleShowArchive(){
     this.props.dispatch(updateFlags({showArchiveFlag: !this.props.flags.showArchiveFlag}))
   }
-  handleShowMember(){
-    this.props.dispatch(updateFlags({showMemberFlag: !this.props.flags.showMemberFlag}))
+  handleShowCategory(){
+    this.props.dispatch(updateFlags({showCategoryFlag: !this.props.flags.showCategoryFlag}))
   }
   render() {
     const showChartFlag = this.props.flags.showChartFlag;
     const showArchiveFlag = this.props.flags.showArchiveFlag;
-    const showMemberFlag = this.props.flags.showMemberFlag;
+    const showCategoryFlag = this.props.flags.showCategoryFlag;
     return (
       <div>
         <div className="topMenu">
@@ -50,12 +50,12 @@ class App extends Component {
             <button className={showChartFlag ? 'on' : ''} onClick={()=>this.handleShowChart(true)}>Chart</button>
             <button className={!showChartFlag ? 'on' : ''} onClick={()=>this.handleShowChart(false)}>Board</button>
             <button className={showArchiveFlag ? 'on' : ''} onClick={()=>this.handleShowArchive()}>Archive</button>
-            <button className={showMemberFlag ? 'on' : ''} onClick={()=>this.handleShowMember()}>Member</button>
+            <button className={showCategoryFlag ? 'on' : ''} onClick={()=>this.handleShowCategory()}>Category</button>
           </div>
         </div>
         {this.props.flags.showChartFlag ? <Chart/> : <Board/>}
         {this.props.flags.showTaskFlag && <EditTask/>}
-        {this.props.flags.showMemberFlag && <EditMember/>}
+        {this.props.flags.showCategoryFlag && <EditCategory/>}
       </div>
     )
   }
@@ -64,7 +64,7 @@ class App extends Component {
 let propsState = (state) => {
   return {
     tasks: state.tasks,
-    members: state.members,
+    categories: state.categories,
     flags: state.flags,
     keys: state.keys
   }

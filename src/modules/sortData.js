@@ -10,7 +10,7 @@ export function sortTasks(data){
     })
 }
 
-export function sortMembers(data){
+export function sortCategories(data){
     return data.sort(function(a,b){
         if(a.num<b.num) return -1;
         if(a.num>b.num) return 1;

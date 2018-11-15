@@ -17,21 +17,21 @@ export function removeTasks(key) {
   return action;
 }
 
-//members
+//categories
 
 
-export function updateMembers(member,key) {
+export function updateCategories(category,key) {
   const action ={
-    type: 'UPDATE_MEMBERS',
+    type: 'UPDATE_CATEGORIES',
     key: key,
-    data: member
+    data: category
   };
   return action;
 }
 
-export function removeMembers(key) {
+export function removeCategories(key) {
   const action ={
-    type: 'REMOVE_MEMBERS',
+    type: 'REMOVE_CATEGORIES',
     key: key 
   } 
   return action;

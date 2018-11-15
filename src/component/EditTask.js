@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {sortMembers} from '../modules/sortData'
+import {sortCategories} from '../modules/sortData'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import "react-day-picker/lib/style.css"
 import GithubPicker from 'react-color/lib/components/github/Github'
@@ -29,14 +29,14 @@ class EditTask extends Component {
     })
   }
 
-  changeTaskMember(){
-    const memberKey = this.refs.taskMember.value;
-    const newTask = {...this.state.task, memberKey: memberKey}
+  changeTaskCategory(){
+    const categoryKey = this.refs.taskCategory.value;
+    const newTask = {...this.state.task, categoryKey: categoryKey}
     this.setState({task : newTask});
     const taskKey = this.props.keys.taskKey;
     if (taskKey) {
       this.props.dispatch(updateTasks(newTask, taskKey));
-      this.props.dispatch(updateKeys({memberKey: memberKey}));
+      this.props.dispatch(updateKeys({categoryKey: categoryKey}));
     }
   }
 
@@ -76,7 +76,7 @@ class EditTask extends Component {
 
   setTaskData() {
     const taskKey = this.props.keys.taskKey;
-    const memberKey = this.props.keys.memberKey;
+    const categoryKey = this.props.keys.categoryKey;
     if (!this.refs.editTitle.value) {
       alert('タイトルを入力してください')
       return false;
@@ -88,7 +88,7 @@ class EditTask extends Component {
       endDate: this.refs.editEndDate.input.value,
       desc: this.refs.editDetail.value,
       taskKey: taskKey || generateKey(),
-      memberKey: memberKey,
+      categoryKey: categoryKey,
       taskColor: this.state.task.taskColor 
     }
     this.props.dispatch(updateTasks(newTask,newTask.taskKey));
@@ -157,18 +157,18 @@ class EditTask extends Component {
   render() {
     const task = this.state.task;
     const taskKey = this.props.keys.taskKey;
-    const memberKey = this.props.keys.memberKey;
+    const categoryKey = this.props.keys.categoryKey;
     const taskEditFlag = this.state.taskEditFlag;
-    const membersArray = this.props.members && sortMembers(Object.keys(this.props.members).map(key => {return this.props.members[key]}))
+    const categoriesArray = this.props.categories && sortCategories(Object.keys(this.props.categories).map(key => {return this.props.categories[key]}))
     return (
         <div className="editBg" onClick={()=>this.hideTask()}>
           <div className="editBody" onClick={this.editBodyClick.bind(this)} style={{borderTopColor: task.taskColor }}>
             <button className="editCancel" onClick={()=>this.hideTask()}>×</button>
             {taskKey && !taskEditFlag && <button className="editChangeButton" onClick={()=>this.handleTaskEditFlag()}>編集</button>}
             <div className="editMenu">
-              <div className="editMenuMember">
-                <select onChange={()=>this.changeTaskMember()} defaultValue={memberKey} ref="taskMember">
-                  {membersArray.map((member) => (<option value={member.memberKey} key={member.memberKey}>{member.name}</option>))}
+              <div className="editMenuCategory">
+                <select onChange={()=>this.changeTaskCategory()} defaultValue={categoryKey} ref="taskCategory">
+                  {categoriesArray.map((category) => (<option value={category.categoryKey} key={category.categoryKey}>{category.name}</option>))}
                 </select>
               </div>
               <div>color
@@ -243,7 +243,7 @@ class EditTask extends Component {
 let propsState = (state) => {
   return {
     tasks: state.tasks,
-    members: state.members,
+    categories: state.categories,
     flags: state.flags,
     keys: state.keys
   }

@@ -2,14 +2,14 @@ import generateKey from './generateKey'
 
 function sampleData(){
   const today = new Date();
-  let sampleMember = {};
+  let sampleCategory = {};
   [...Array(3)].forEach((none,i)=>{
     const num = i + 1;
-    const memberKey = generateKey();
-    sampleMember[memberKey] = {
-      name: 'sampleMember' + num,
+    const categoryKey = generateKey();
+    sampleCategory[categoryKey] = {
+      name: 'sampleCategory' + num,
       num: i,
-      memberKey: memberKey
+      categoryKey: categoryKey
     }
   });
   
@@ -35,7 +35,7 @@ function sampleData(){
   const sampleTasks = {};
   [...Array(16)].forEach((none,i)=>{
     const num = i + 1;
-    const memberNum = i % 3;
+    const categoryNum = i % 3;
     const start = -Math.floor(Math.random() * 20);
     const end = Math.floor(Math.random() * 20);  
     const startDate = new Date(today.getTime() + start*24*60*60*1000);
@@ -43,9 +43,9 @@ function sampleData(){
     const startDateTxt = startDate.getFullYear() + '-' + (startDate.getMonth()+1) + '-' + startDate.getDate();
     const endDateTxt = endDate.getFullYear() + '-' + (endDate.getMonth()+1) + '-' + endDate.getDate();
     const taskKey = generateKey()
-    let memberKey;
-    Object.keys(sampleMember).forEach(key=>{
-      if(sampleMember[key].num === memberNum) memberKey = key
+    let categoryKey;
+    Object.keys(sampleCategory).forEach(key=>{
+      if(sampleCategory[key].num === categoryNum) categoryKey = key
     })
     sampleTasks[taskKey] = {
       archive : i < 12 ? false : true, 
@@ -53,7 +53,7 @@ function sampleData(){
       remarks: 'sampleRemarks'  + num,
       desc: 'sampleTask'+num+'\nsampleTask'+num+'\nsampleTask'+num+'\nsampleTask'+num,
       taskKey: taskKey,
-      memberKey: memberKey,
+      categoryKey: categoryKey,
       startDate: startDateTxt,
       endDate: endDateTxt,
       taskColor: taskColors[Math.floor(Math.random() * 16)]
@@ -61,7 +61,7 @@ function sampleData(){
   });
   return {
     tasks: sampleTasks,
-    members: sampleMember,
+    categories: sampleCategory,
   }
 };
 

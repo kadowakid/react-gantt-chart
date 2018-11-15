@@ -25,16 +25,16 @@ const reduceTasks = (state = initialState.tasks, action) => {
     }
 };
 
-const reduceMembers = (state = initialState.members, action) => {
+const reduceCategories = (state = initialState.categories, action) => {
     switch (action.type) {
-        case 'UPDATE_MEMBERS':
-            let updateMembers = {...state};
-            updateMembers[action.key] = action.data;
-            return updateMembers;
-        case 'REMOVE_MEMBERS':
-            let removeMembers = {...state};
-            delete removeMembers[action.key];
-            return removeMembers;
+        case 'UPDATE_CATEGORIES':
+            let updateCategories = {...state};
+            updateCategories[action.key] = action.data;
+            return updateCategories;
+        case 'REMOVE_CATEGORIES':
+            let removeCategories = {...state};
+            delete removeCategories[action.key];
+            return removeCategories;
         default:
             return state;
     }
@@ -60,7 +60,7 @@ const reduceKeys = (state = initialState.keys, action) => {
 
 export const reducer = combineReducers({
     tasks: reduceTasks,
-    members: reduceMembers,
+    categories: reduceCategories,
     flags: reduceFlags,
     keys: reduceKeys
 })
