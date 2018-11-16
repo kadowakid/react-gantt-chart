@@ -106,8 +106,10 @@ class Chart extends Component {
 
   render() {
     const showArchiveFlag = this.props.flags.showArchiveFlag;
+    const sortFlag = this.props.flags.sortFlag;
     const categoriesArray = this.props.categories && sortCategories(Object.keys(this.props.categories).map(key => {return this.props.categories[key]}))
-    const tasksArray = this.props.tasks && sortTasks(Object.keys(this.props.tasks).map(key => {return this.props.tasks[key]}))
+    let tasksArray = this.props.tasks && Object.keys(this.props.tasks).map(key => {return this.props.tasks[key]})
+    tasksArray = tasksArray && sortFlag ? sortTasks(tasksArray) : tasksArray;
     const chartObject = chart(this.state.chartPrev, this.state.chartNext);
     return (
       <div>

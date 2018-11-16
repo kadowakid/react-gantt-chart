@@ -32,6 +32,9 @@ class App extends Component {
       this.props.dispatch(updateFlags({showChartFlag: !this.props.flags.showChartFlag}))
     })
   }
+  handleSort() {
+    this.props.dispatch(updateFlags({sortFlag: !this.props.flags.sortFlag}))
+  }
   handleShowArchive(){
     this.props.dispatch(updateFlags({showArchiveFlag: !this.props.flags.showArchiveFlag}))
   }
@@ -40,6 +43,7 @@ class App extends Component {
   }
   render() {
     const showChartFlag = this.props.flags.showChartFlag;
+    const sortFlag = this.props.flags.sortFlag;
     const showArchiveFlag = this.props.flags.showArchiveFlag;
     const showCategoryFlag = this.props.flags.showCategoryFlag;
     return (
@@ -49,6 +53,7 @@ class App extends Component {
           <div className="topMenuTabs">
             <button className={showChartFlag ? 'on' : ''} onClick={()=>this.handleShowChart(true)}>Chart</button>
             <button className={!showChartFlag ? 'on' : ''} onClick={()=>this.handleShowChart(false)}>Board</button>
+            <button className={sortFlag ? 'on' : ''} onClick={()=>this.handleSort()}>Sort</button>
             <button className={showArchiveFlag ? 'on' : ''} onClick={()=>this.handleShowArchive()}>Archive</button>
             <button className={showCategoryFlag ? 'on' : ''} onClick={()=>this.handleShowCategory()}>Category</button>
           </div>

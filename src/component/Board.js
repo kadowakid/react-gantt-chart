@@ -50,9 +50,11 @@ class Board extends Component {
   }
   render() {
     const showArchiveFlag = this.props.flags.showArchiveFlag;
+    const sortFlag = this.props.flags.sortFlag;
     const addCategoriesFlag = this.state.addCategoriesFlag;
     const categoriesArray = this.props.categories && sortCategories(Object.keys(this.props.categories).map(key => {return this.props.categories[key]}))
-    const tasksArray = this.props.tasks && sortTasks(Object.keys(this.props.tasks).map(key => {return this.props.tasks[key]}))
+    let tasksArray = this.props.tasks && Object.keys(this.props.tasks).map(key => {return this.props.tasks[key]});
+    tasksArray = tasksArray && sortFlag ? sortTasks(tasksArray) : tasksArray;
     return (
     <div>
       <div className="boardArea" onClick={()=>this.setState({addCategoriesFlag: false})}>

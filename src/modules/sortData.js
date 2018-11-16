@@ -2,10 +2,12 @@ function replaceText(text){
     if(text) return text.replace(/-/g,"/");
 }
 
-export function sortTasks(data){
+export function sortTasks(data, prop = 'startDate'){
     return data.sort(function(a,b){
-        if(a.startDay && !b.startDay || new Date(replaceText(a.startDay)).getTime() < new Date(replaceText(b.startDay)).getTime()) return -1;
-        if(!a.startDay && b.startDay || new Date(replaceText(a.startDay)).getTime() > new Date(replaceText(b.startDay)).getTime()) return 1;
+        const a_time = new Date(replaceText(a[prop])).getTime();
+        const b_time = new Date(replaceText(b[prop])).getTime();
+        if(a[prop] && !b[prop] || a_time < b_time) return -1;
+        if(!a[prop] && b[prop] || a_time > b_time) return 1;
         return 0
     })
 }
