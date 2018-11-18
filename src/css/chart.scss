@@ -74,101 +74,91 @@
     width: 100%;
     white-space: nowrap;
     box-sizing: border-box;
-  }
-  .chartCalenderYearBlock {
-    height: 90px;
-    display: inline-block;
-    border-right: 1px solid $gray;
-    box-sizing: border-box;
-    overflow-y: hidden;
-    &:last-child {
+    li {
+      height: 90px;
+      display: inline-block;
       border-right: 1px solid $gray;
-    }
-  }
-  .chartCalenderYear {
-    box-sizing: border-box;
-    height: 30px;
-    line-height: 30px;
-    border-bottom: 1px solid $gray;
-    text-align: center;
-  }
-  .chartCalenderMonth {
-    box-sizing: border-box;
-    height: 30px;
-    line-height: 30px;
-    border-bottom: 1px solid $gray;
-    border-right: 1px solid $gray;
-    text-align: center;
-    &:last-child {
-      border-right: 0;
-    }  
-  }
-  .chartCalenderDay {
-    height: 30px;
-    min-width: 20px;
-    line-height: 30px;
-    box-sizing: border-box;
-    border-right: 1px solid $gray;
-    text-align: center;
-    &.saturday {
-      background: #e0ffff;
-    }
-    &.sunday {
-      background: #ffb6c1;
-    }
-    &.today {
-      background: $light_gray;
-    }
-    &:last-child {
-      border-right: 0;
+      box-sizing: border-box;
+      overflow-y: hidden;
+      &:last-child {
+        border-right: 1px solid $gray;
+      }
+      td {
+        box-sizing: border-box;
+        height: 30px;
+        line-height: 30px;
+        border-bottom: 1px solid $gray;
+        border-right: 1px solid $gray;
+        text-align: center;
+        &:last-child {
+          border-right: 0;
+        }  
+      }
+      .chartCalenderDate td{
+        min-width: 20px;
+        &.saturday {
+          background: #e0ffff;
+        }
+        &.sunday {
+          background: #ffb6c1;
+        }
+        &.today {
+          background: $light_gray;
+        }
+        &:last-child {
+          border-right: 0;
+        }
+      }
     }
   }
   .chartContent {
     white-space: nowrap;
     max-height: calc(100vh - 210px);
     overflow: scroll;
-  }
-  .chartContentYearBlock {
-    display: inline-block;
-    vertical-align: top;
-    &:last-child {
-      border-right: 1px solid $gray;
-      table {
-        overflow: hidden;
+    li {
+      display: inline-block;
+      vertical-align: top;
+      &:last-child {
+        border-right: 1px solid $gray;
+        table {
+          overflow: hidden;
+        }
+      }
+      .chartContentCell td {
+        max-height: 30px;
+        min-width: 20px;
+        line-height: 30px;
+        box-sizing: border-box;
+        border-top: 1px solid $gray;
+        border-right: 1px solid $gray;
+        text-align: center;
+        position: relative;
+        &:before {
+          content: "";
+          display: block;
+          height: 29px;
+          width: 0;
+        }
+        &.archive {
+          opacity: 1;
+          .chartContentBar {
+            opacity: 0.5;
+          }
+        }
+        &.saturday {
+          background: #e0ffff;
+        }
+        &.sunday {
+          background: #ffb6c1;
+        }
+        &.today {
+          background: $light_gray;
+        }
       }
     }
   }
-  .chartContentCell {
-    max-height: 30px;
-    min-width: 20px;
-    line-height: 30px;
-    box-sizing: border-box;
-    border-top: 1px solid $gray;
-    border-right: 1px solid $gray;
-    text-align: center;
-    position: relative;
-    &:before {
-      content: "";
-      display: block;
-      height: 29px;
-      width: 0;
-    }
-    &.archive {
-      opacity: 1;
-      .chartContentBar {
-        opacity: 0.5;
-      }
-    }
-    &.saturday {
-      background: #e0ffff;
-    }
-    &.sunday {
-      background: #ffb6c1;
-    }
-    &.today {
-      background: $light_gray;
-    }
-  }
+  
+  
   .chartContentBar {
     display: inline-block;
     position: absolute;

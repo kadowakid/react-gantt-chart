@@ -164,16 +164,16 @@ class EditTask extends Component {
         <div className="editBg" onClick={()=>this.hideTask()}>
           <div className="editBody" onClick={this.editBodyClick.bind(this)} style={{borderTopColor: task.taskColor }}>
             <button className="editCancel" onClick={()=>this.hideTask()}>×</button>
-            {taskKey && !taskEditFlag && <button className="editChangeButton" onClick={()=>this.handleTaskEditFlag()}>編集</button>}
+            {taskKey && !taskEditFlag && !task.archive && <button className="editChangeButton" onClick={()=>this.handleTaskEditFlag()}>編集</button>}
             <div className="editMenu">
-              <div className="editMenuCategory">
+              <div className={"editMenuCategory" + (task.archive ? ' archive' : '')}>
                 <select onChange={()=>this.changeTaskCategory()} defaultValue={categoryKey} ref="taskCategory">
                   {categoriesArray.map((category) => (<option value={category.categoryKey} key={category.categoryKey}>{category.name}</option>))}
                 </select>
               </div>
-              <div>color
+              <div className={task.archive ? 'archive' : ''}>color
                 <button onClick={(e)=>this.handleColorPickerFlag(e)} className="editColorButton" style={{background: task.taskColor}}></button>
-                  <div className="editColorPicker">
+                  <div className={"editColorPicker" + (task.archive ? ' archive' : '')}>
                     {this.state.colorPickerFlag &&
                       <GithubPicker
                         color={task.taskColor}
@@ -184,7 +184,7 @@ class EditTask extends Component {
                   </div>
                 </div>
                 {[...Array(2)].map((none,i)=>(
-                  <div key={i}>
+                  <div key={i} className={task.archive ? 'archive' : ''}>
                     <span className="day">{!i ? 'start' : 'end'}</span>
                     <DayPickerInput onDayChange={()=>this.changeDate(!i ? 'start' : 'end')} value={!i
                       ? task.startDate
@@ -192,7 +192,7 @@ class EditTask extends Component {
                     />
                   </div>
                 ))}
-                <div className="sideMenu" onClick={()=>this.resetTaskDate()}>日付リセット</div>
+                <div className={"sideMenu" + (task.archive ? ' archive' : '')} onClick={()=>this.resetTaskDate()}>日付リセット</div>
                 {taskKey && <div className="sideMenu" onClick={() => this.archiveTask()}>アーカイブ{task.archive ? '解除' : ''}</div>}
                 {taskKey && <div className="sideMenu" onClick={() => this.removeTasks(taskKey)}>削除</div>}            
               </div>

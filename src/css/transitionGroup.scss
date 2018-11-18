@@ -1,3 +1,11 @@
+.fade-appear {
+  opacity: 0.01;
+}
+
+.fade-appear.fade-appear-active {
+  opacity: 1;
+}
+
 .fade-enter {
   transform: translateY(3px) scale(0.97);
 }

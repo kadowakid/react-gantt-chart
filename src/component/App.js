@@ -5,7 +5,6 @@ import Board from './Board'
 import EditTask from './EditTask'
 import EditCategory from './EditCategory'
 import {updateFlags} from '../action'
-import {slideAnimation} from 'blackout-animation'
 import "../css/app.scss";
 
 class App extends Component {
@@ -20,17 +19,8 @@ class App extends Component {
     const storage = JSON.stringify(data);
     localStorage.setItem('ReactGanttChart', storage);
   }
-  handleShowChart(chart){
-    const flag = chart === this.props.flags.showChartFlag;
-    if(flag) return false;
-    slideAnimation({
-      type: 1,
-      transition: 400,
-      interval: 200,
-      color: '#f0f0f0'
-    },()=>{
-      this.props.dispatch(updateFlags({showChartFlag: !this.props.flags.showChartFlag}))
-    })
+  handleShowChart(){
+    this.props.dispatch(updateFlags({showChartFlag: !this.props.flags.showChartFlag}))
   }
   handleSort() {
     this.props.dispatch(updateFlags({sortFlag: !this.props.flags.sortFlag}))

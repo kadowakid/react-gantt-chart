@@ -94,6 +94,10 @@
       line-height: normal;
     }
   }
+  .archive {
+    opacity: .5;
+    pointer-events: none;
+  }
   .editMenuCategory:after {
     content:"";
     display:block;
@@ -202,6 +206,7 @@
     top: 50%;
     transform: translateY(-50%);
     transition: .3s;
+    cursor: pointer;
   }
   .editColorPicker {
     position: absolute;

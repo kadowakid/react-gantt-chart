@@ -8,7 +8,7 @@ export function chart(prev,next){
   const nextYear = Math.floor((currentMonth + next) / 12);
   let chartData = [];
   for(let y = prevYear ; y <= nextYear; y++){
-    let yearLength = 0;
+    let yearDateLength = 0;
     let monthList = []; 
     for(let m = -prev ; m <= next ; m++){
       const newMonthValue = currentMonth + m;
@@ -28,12 +28,12 @@ export function chart(prev,next){
         startDay : startDay
       };
       monthList.push(monthData);
-      yearLength += dateList.length;
+      yearDateLength += dateList.length;
     }
     const yearData = {
       yearNum : currentYear + y,
       monthList : monthList,
-      yearLength : yearLength
+      yearDateLength : yearDateLength
     }
     chartData.push(yearData);
   }
