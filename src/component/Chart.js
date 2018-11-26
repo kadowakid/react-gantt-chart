@@ -26,14 +26,14 @@ class Chart extends Component {
   setDefaultScroll(){
     if(!this.state.defaultScrollFlag || !Object.keys(this.props.categories).length) return false;
     const cellWidth = 20;
-    let chartObject = chart(this.state.chartPrev,0);
+    let chartData = chart(this.state.chartPrev,0);
     let scrollNum = 0;
-    chartObject.map(year=> year.monthList.map(month=> {
+    chartData.map(year=> year.monthList.map(month=> {
       scrollNum += month.dateList.length;
     }))
     const today = new Date().getDate();
     const defMargin = (today - 15) * cellWidth;
-    scrollNum = scrollNum - chartObject.pop().monthList.pop().dateList.length;
+    scrollNum = scrollNum - chartData.pop().monthList.pop().dateList.length;
     this.refs.chartContent.scrollLeft = scrollNum * cellWidth + defMargin;
     this.setState({defaultScrollFlag: false})
   }
@@ -110,7 +110,7 @@ class Chart extends Component {
     const categoriesArray = this.props.categories && sortCategories(Object.keys(this.props.categories).map(key => {return this.props.categories[key]}))
     let tasksArray = this.props.tasks && Object.keys(this.props.tasks).map(key => {return this.props.tasks[key]})
     tasksArray = tasksArray && sortFlag ? sortTasks(tasksArray) : tasksArray;
-    const chartObject = chart(this.state.chartPrev, this.state.chartNext);
+    const chartData = chart(this.state.chartPrev, this.state.chartNext);
     return (
       <div>
         {tasksArray.length &&
@@ -155,24 +155,24 @@ class Chart extends Component {
               <div className="chartCalenderArea">
                 <ul className="chartCalenderHeader" ref="chartHeader">
                   {
-                    chartObject.map((yearObject) => (
-                      <li key={yearObject.yearNum}>
+                    chartData.map((yearData) => (
+                      <li key={yearData.yearNum}>
                         <table>
                           <tbody>
                             <tr>
-                              <td colSpan={yearObject.yearDateLength}>{yearObject.yearNum + '年'}</td>
+                              <td colSpan={yearData.yearDateLength}>{yearData.yearNum + '年'}</td>
                             </tr>
                             <tr>
                               {
-                                yearObject.monthList.map((monthObject) => (
-                                  <td key={monthObject.monthNum} colSpan={monthObject.dateList.length}>{monthObject.monthNum + '月'}</td>
+                                yearData.monthList.map((monthData) => (
+                                  <td key={monthData.monthNum} colSpan={monthData.dateList.length}>{monthData.monthNum + '月'}</td>
                                 ))
                               }
                             </tr>
                             <tr className="chartCalenderDate">
                               {
-                                yearObject.monthList.map((monthObject) => monthObject.dateList.map((date) => {
-                                  return (<td className={this.editChartDay(yearObject.yearNum, monthObject.monthNum, date, monthObject.startDay)} key={date}>{date}</td>)
+                                yearData.monthList.map((monthData) => monthData.dateList.map((date) => {
+                                  return (<td className={this.editChartDay(yearData.yearNum, monthData.monthNum, date, monthData.startDay)} key={date}>{date}</td>)
                                 }))
                               }
                             </tr>
@@ -184,15 +184,15 @@ class Chart extends Component {
                 </ul>
                 <ul className="chartContent" onScroll={()=>this.chartScroll()} ref="chartContent">
                   {
-                    chartObject.map((yearObject,yearNum) => (
-                      <li key={yearObject.yearNum}>
+                    chartData.map((yearData,yearNum) => (
+                      <li key={yearData.yearNum}>
                         <table>
                           {
                             categoriesArray.map((category) => (<tbody key={category.categoryKey}>
                               <tr className="chartContentCell" key={category.categoryKey}>
                                 {
-                                  yearObject.monthList.map((monthObject) => monthObject.dateList.map((date) => {
-                                    return (<td className={this.editChartDay(yearObject.yearNum, monthObject.monthNum, date, monthObject.startDay)} key={date}></td>)
+                                  yearData.monthList.map((monthData) => monthData.dateList.map((date) => {
+                                    return (<td className={this.editChartDay(yearData.yearNum, monthData.monthNum, date, monthData.startDay)} key={date}></td>)
                                   }))
                                 }
                               </tr>
@@ -202,12 +202,12 @@ class Chart extends Component {
                                     return (
                                     <tr className="chartContentCell" key={cell.taskKey}>
                                       {
-                                        yearObject.monthList.map((monthObject,monthNum) => monthObject.dateList.map((date,dateNum) => {
-                                          const editChartBar = cell.endDate && cell.startDate === yearObject.yearNum + '-' + monthObject.monthNum + '-' + date;
-                                          const overflow = cell.startDate && cell.endDate && !yearNum && !monthNum && !dateNum　? [yearObject.yearNum, monthObject.monthNum - 1, date] : false;
+                                        yearData.monthList.map((monthData,monthNum) => monthData.dateList.map((date,dateNum) => {
+                                          const editChartBar = cell.endDate && cell.startDate === yearData.yearNum + '-' + monthData.monthNum + '-' + date;
+                                          const overflow = cell.startDate && cell.endDate && !yearNum && !monthNum && !dateNum　? [yearData.yearNum, monthData.monthNum - 1, date] : false;
                                           const chartBarSize = (editChartBar || overflow) && this.editChartBarSize(cell.startDate, cell.endDate, overflow)
                                           return (
-                                            <td className={this.editChartDay(yearObject.yearNum, monthObject.monthNum, date, monthObject.startDay) + (cell.archive ? " archive" : "")} key={date}>{
+                                            <td className={this.editChartDay(yearData.yearNum, monthData.monthNum, date, monthData.startDay) + (cell.archive ? " archive" : "")} key={date}>{
                                               chartBarSize && 
                                                 <div className="chartContentBar" style={{
                                                   background: cell.taskColor,

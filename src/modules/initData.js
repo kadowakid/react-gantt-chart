@@ -50,7 +50,7 @@ function sampleData(){
     sampleTasks[taskKey] = {
       archive : i > 12, 
       title : 'sampleTask' + num,
-      remarks: 'sampleRemarks'  + num,
+      remarks: 'sampleTask'  + num,
       desc: 'sampleTask'+num+'\nsampleTask'+num+'\nsampleTask'+num+'\nsampleTask'+num,
       taskKey: taskKey,
       categoryKey: categoryKey,
